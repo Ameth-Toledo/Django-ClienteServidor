@@ -3,10 +3,27 @@
 {% block content %}
 <h1>Bienvenido a la Página Principal</h1>
 <p>Esta es la página de inicio de tu proyecto.</p>
-<p>{{ Saludo }}</p>
+
 <ol>
     {% for val in Lista %}
-    <li>{{ val.name }} - {{ val.description }} </li>
+    <li>{{ val.name }} - {{ val.description }} | 
+        <a href="{% url 'editar_carrera' val.pk %}">editar</a> | 
+        <a href="{% url 'eliminar_carrera' val.pk %}">eliminar</a> 
+    </li>
     {% endfor %}
 </ol>
+
+<script>
+    const socket = new WebSocket('ws://' + window.location.host + '/ws/somepath/');
+
+    socket.onmessage = function(event) {
+        const data = JSON.parse(event.data);
+        console.log('Datos recibidos:', data.message);
+        data.message.forEach(carrera => {
+            console.log("Carrera:", carrera.name);
+            console.log("Descripción:", carrera.description);
+        });
+    };
+</script>
+
 {% endblock content %}

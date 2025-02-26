@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'channels',
+    'daphne',
     'tutorial'
 ]
 
@@ -69,7 +71,14 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'tutorial.wsgi.application'
+# se agrego esto: para socket
+ASGI_APPLICATION = 'tutorial.asgi.application'
 
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer",
+    },
+}
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases

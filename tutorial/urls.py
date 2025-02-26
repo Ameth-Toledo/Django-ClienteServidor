@@ -17,10 +17,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from .views import HomePageView, AboutPageView, index
+from .views import CarreraCreateViewPage, CarrerasEditarPageView, CarrerasEliminarPageView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', HomePageView.as_view(), name='home'),
     path('index/', index, name='index'),
     path('about/', AboutPageView.as_view(), name='about'),
+    path('carrera/crear', CarreraCreateViewPage.as_view(), name="carrera/crear"),
+    path("carreras/editar/<int:pk>", CarrerasEditarPageView.as_view(), name="editar_carrera"),
+    path('carreras/eliminar/<int:pk>', CarrerasEliminarPageView.as_view(), name="eliminar_carrera")
 ]
